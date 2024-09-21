@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  users-services:
+    build: ./users
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./users/.env
+  mongo-users:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongouser
+      - MONGO_INITDB_ROOT_PASSWORD=mongopass
+    volumes:
+      - mongo-users:/data/db
+
+volumes:
+  mongo-users:
